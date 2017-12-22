@@ -1,0 +1,2 @@
+Options: 
+CMake: 3.8.2@/Users/backes/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-1/172.3968.3/CLion 2017.2 EAP.app/Contents/bin/cmake/bin/cmake
