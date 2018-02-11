@@ -1,13 +1,11 @@
-Raytracer Collection
+Ray- Pathtracer Collection
 ===
 
 Collection of Ray- and Pathtracer implementations from different sources, tutorials and books.
 
-### InAWeekend
+### InOneWeekend
 Implementation from the *trilogy* **Raytracing in one weekend**, **Raytracing the next week** and **Raytracing the rest of your life** from Peter Shirley.
+CPU single-threaded renderer which currently only supports diffuse materials and spheres. openGL runs in a second thread to have a realtime renderer. Output is saved in a [PPM](http://netpbm.sourceforge.net/doc/ppm.html) file. Next versions include more materials, multithreading, .obj loading and spatial accelerating data structures.
 
-### Codex
-The projects from **The Graphics Codex** from McGuire. This requires the g3d engine. 
-
-### ScratchPixel
-Implementation from [scratchpixel.com](scratchpixel.com)
+### InAWeekend
+Reference implementation of **Raytracing in one weekend**. 

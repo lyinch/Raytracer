@@ -27,7 +27,7 @@ hitable *random_scene(){
 
                 }
             }
-        } 
+        }
     }
     return new hitable_list(list,i);
 }
@@ -57,26 +57,26 @@ int main() {
     std::ofstream file;
     file.open("out.ppm");
 
-    int nx = 200;
-    int ny = 100;
-    int ns = 100;
+    int nx = 800;
+    int ny = 400;
+    int ns = 50;
     file << "P3\n" << nx << " " << ny << "\n255\n";
 
-    /*
+
     hitable *list[4];
     list[0] = new sphere(vec3(0,0,-1),0.5,new lambertian(vec3(0.8,0.3,0.3)));
     list[1] = new sphere(vec3(0,-100.5f,-1),100,new lambertian(vec3(0.8,0.8,0.0)));
-    list[2] = new sphere(vec3(1,0,-1.5f),0.5,new metal(vec3(0.8,0.6,0.2),0.4f));
-    list[3] = new sphere(vec3(-1,0,-1),0.5f,new dielectric(1.5)); //left */
+    list[2] = new sphere(vec3(1,0,-1),0.5,new metal(vec3(0.8,0.6,0.2),0.4f));
+    list[3] = new sphere(vec3(-1,0,-1),0.5f,new dielectric(1.5)); //left
 
-    //hitable *world = new hitable_list(list,4);
-    hitable *scene = random_scene();
+    hitable *world = new hitable_list(list,4);
+    //hitable *scene = random_scene();
 
-    vec3 lookfrom(13,2,3);
+    vec3 lookfrom(0,0,4);
     vec3 lookat(0,0,0);
     //float dist_to_focus = (lookfrom-lookat).length();
     float dist_to_focus = 10;
-    float aperture = .1f;
+    float aperture = .001f;
     camera cam(lookfrom,lookat,vec3(0,1,0),20 ,(float)nx/(float)ny,aperture,dist_to_focus);
     auto start = std::chrono::high_resolution_clock::now();
     for (int j = ny-1; j >= 0; --j) {
@@ -87,7 +87,7 @@ int main() {
                 float v = (float)(j+drand48())/(float)ny;
                 ray r = cam.get_ray(u,v);
                 vec3 p = r.point_at_parameter(2.0);
-                col += color(r,scene,0);
+                col += color(r,world,0);
             }
 
             col /= float(ns);
@@ -98,7 +98,7 @@ int main() {
             auto ib = int(255.99f*col[2]);
             file << ir << " " << ig << " " << ib << "\n";
         }
-        printf("\r%f",((float)(ny-j)/(float)ny)*100);
+        printf("\r%.2f%%",((float)(ny-j)/(float)ny)*100);
         fflush(stdout);
     }
     auto end = std::chrono::high_resolution_clock::now();
