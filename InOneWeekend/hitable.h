@@ -7,10 +7,13 @@
 
 #include "ray.h"
 
+extern class material;
+
 struct hit_record{
-    float t; //z coordinate of hit
+    float t{}; //z coordinate of hit
     Vec3 p; //exact point of hit
     Vec3 normal;
+    material *mat_ptr;
 };
 
 class hitable{

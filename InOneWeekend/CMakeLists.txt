@@ -18,7 +18,7 @@ find_package(PkgConfig REQUIRED)
 pkg_search_module(GLFW REQUIRED glfw3)
 include_directories(${GLFW_INCLUDE_DIRS})
 
-set(SOURCE_FILES main.cpp vec3.h ray.h hitable.h sphere.h hitable_list.h camera.h shader.h window.h)
+set(SOURCE_FILES main.cpp vec3.h ray.h hitable.h sphere.h hitable_list.h camera.h shader.h window.h material.h)
 
 add_executable(InOneWeekend ${SOURCE_FILES})
 target_link_libraries(InOneWeekend ${GLFW_STATIC_LIBRARIES} "-framework OpenGL")
