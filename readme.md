@@ -1,3 +1,4 @@
+
 Ray- Pathtracer Collection
 ===
 
@@ -9,3 +10,6 @@ CPU single-threaded renderer which currently only supports diffuse materials and
 
 ### InAWeekend
 Reference implementation of **Raytracing in one weekend**. 
+
+### ScratchPixel
+Implementation from [ScratchPixel](www.scratchpixel.com.com). Currently only Whitted style raytracing. Next steps are an .obj loader, rendering of meshes, lights, correct shading (pathtracer), accelerating datastructure (BVH), implicit surfaces and multithreading. A possible extension is an interactive renderer with an openGL context. 
