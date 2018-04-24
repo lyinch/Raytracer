@@ -8,7 +8,8 @@
 #include <fstream>
 #include "MathUtils.h"
 #include "Matrix.h"
-
+#include "Triangle.h"
+#include <sstream>
 
 struct Options
 {
@@ -31,5 +32,31 @@ void writeToFile(const std::string &fileName, const Options &options, const Vec3
         ofs << r << g << b;
     }
     ofs.close();
+}
+
+
+void readObj(const std::string &fileName,std::vector<std::shared_ptr<Object>> &triangles){
+    std::ifstream file(fileName);
+    std::string str;
+    std::vector<Vec3f> vertices;
+    //std::vector<Triangle> triangles;
+    while(std::getline(file,str)){
+        std::istringstream iss(str);
+        //tokenize the string by whitespace
+        std::vector<std::string> tokens{std::istream_iterator<std::string>{iss},
+                                        std::istream_iterator<std::string>{}};
+        if(tokens[0] == "v"){
+            vertices.push_back(Vec3f(std::stof(tokens[1]),std::stof(tokens[2]),std::stof(tokens[3])));
+        }else if(tokens[0] == "f"){
+            //f has the format x/y/z where x: vertex index, y: texture index, z: vertex normal
+            unsigned long dela = tokens[1].find_first_of("/");
+            unsigned long delb = tokens[2].find_first_of("/");
+            unsigned long delc = tokens[3].find_first_of("/");
+            //obj indexes at 1 but std::vector starts at 0
+            triangles.push_back(std::shared_ptr<Object>(new Triangle(vertices[std::stof(tokens[1].substr(0,dela))-1],
+                                vertices[std::stof(tokens[2].substr(0,delb))-1],
+                                vertices[std::stof(tokens[3].substr(0,delc))-1])));
+        }
+    }
 }
 #endif //SCRATCHPIXEL_IO_H

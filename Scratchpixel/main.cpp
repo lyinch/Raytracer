@@ -107,6 +107,11 @@ void render(const Options &options,
 }
 
 int main() {
+    std::cout << "Reading obj" << std::endl;
+    std::vector<std::shared_ptr<Object>> triangles;
+    readObj("suzanne.obj",triangles);
+    std::cout << "Finished reading obj" << std::endl;
+
 
 
 
@@ -122,8 +127,10 @@ int main() {
         objects.push_back(std::unique_ptr<Object>(new Sphere(randPos, randRadius)));
     }
 
-
-    objects.push_back(std::unique_ptr<Object>(new Triangle(Vec3f(-1, -1, -5),Vec3f( 1, -1, -5),Vec3f(0,  1, -5))));
+    
+    for(const std::shared_ptr<Object> &triangle : triangles){
+        objects.push_back(std::unique_ptr<Object>(triangle.get()));
+    }
 
     struct Options options{};
     options.width = 640;
